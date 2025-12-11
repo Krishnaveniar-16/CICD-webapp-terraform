@@ -15,7 +15,7 @@ resource "azurerm_service_plan" "appserviceplan" {
   sku_name            = "S1"
 }
 
-#   FRONTEND PROD (.NET)
+
 resource "azurerm_linux_web_app" "webapp" {
   name                = "${var.prefix}-webapp1603"
   resource_group_name = azurerm_resource_group.rg.name
@@ -34,7 +34,6 @@ resource "azurerm_linux_web_app" "webapp" {
 }
 
 
-#   FRONTEND STAGING SLOT (.NET)
 resource "azurerm_linux_web_app_slot" "frontend_slot" {
   name           = "staging"
   app_service_id = azurerm_linux_web_app.webapp.id
