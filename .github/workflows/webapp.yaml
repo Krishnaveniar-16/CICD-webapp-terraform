@@ -6,25 +6,23 @@ on:
       - main
 
 env:
-  AZURE_WEBAPP_NAME: 'capstone-webapp1603'   # Your Azure App Service name
-  DOTNET_VERSION: '8.0.x'                 # Change if needed
+  AZURE_WEBAPP_NAME: 'capstone-webapp1603'   
+  DOTNET_VERSION: '8.0.x'                 
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
 
     steps:
-      # Checkout code
       - name: Checkout Repository
         uses: actions/checkout@v3
 
-      # Install .NET
       - name: Setup .NET
         uses: actions/setup-dotnet@v3
         with:
           dotnet-version: ${{ env.DOTNET_VERSION }}
 
-      # Restore, Build, Publish
+
       - name: Build & Publish
         run: |
           dotnet restore
@@ -38,7 +36,7 @@ jobs:
           slot-name: 'staging'   
           publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE_STAGING }}
           package: published
-      # Deploy to Azure Web App
+
       - name: Deploy to Azure Web App
         uses: azure/webapps-deploy@v3
         with:
